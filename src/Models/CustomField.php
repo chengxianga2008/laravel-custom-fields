@@ -74,6 +74,7 @@ class CustomField extends Model
     protected $casts = [
         'answers' => 'array',
         'archived_at' => 'datetime',
+        'required' => 'boolean',
     ];
 
     /**
