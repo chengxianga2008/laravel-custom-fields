@@ -29,7 +29,7 @@ class CreateCustomFieldsTables extends Migration
             $table->softDeletes();
         });
 
-        Schema::create(config('custom-fields.tables.field_responses', 'custom_field_responses'), function (Blueprint $table) {
+        Schema::create(config('custom-fields.tables.field-responses', 'custom_field_responses'), function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('field_id');
             $table->foreign('field_id')->references('id')->on(config('custom-fields.tables.fields', 'custom_fields'));
@@ -50,7 +50,7 @@ class CreateCustomFieldsTables extends Migration
     public function down()
     {
         Schema::dropIfExists(config('custom-fields.tables.fields', 'custom_fields'));
-        Schema::dropIfExists(config('custom-fields.tables.field_responses', 'custom_field_responses'));
+        Schema::dropIfExists(config('custom-fields.tables.field-responses', 'custom_field_responses'));
     }
-    
+
 }
