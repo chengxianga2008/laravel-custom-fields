@@ -27,16 +27,36 @@ trait HasCustomFieldResponses
         foreach ($fields as $key => $value) {
             $customField = CustomField::find((int) $key);
 
-            if (! $customField) {
+            if (!$customField) {
                 continue;
             }
 
-            CustomFieldResponse::create([
-                'value' => $value,
-                'model_id' => $this->id,
-                'field_id' => $customField->id,
-                'model_type' => get_class($this),
-            ]);
+            if ($customField->type == CustomField::TYPE_MULTISELECT) {
+                CustomFieldResponse::where(
+                    [
+                        'model_id' => $this->id,
+                        'field_id' => $customField->id,
+                        'model_type' => get_class($this),
+                    ]
+                )->delete();
+
+                if (is_array($value)) {
+                    foreach ($value as $ele) {
+                        CustomFieldResponse::create([
+                            'value' => $ele,
+                            'model_id' => $this->id,
+                            'field_id' => $customField->id,
+                            'model_type' => get_class($this),
+                        ]);
+                    }
+                }
+            } else {
+                CustomFieldResponse::updateOrCreate([
+                    'model_id' => $this->id,
+                    'field_id' => $customField->id,
+                    'model_type' => get_class($this),
+                ], ['value' => $value,]);
+            }
         }
     }
 
