@@ -24,6 +24,10 @@ class CustomFieldResponse extends Model
         'value',
     ];
 
+    protected $casts = [
+        'value_int' => 'integer',
+    ];
+
     /**
      * @var string[]
      */
@@ -31,6 +35,7 @@ class CustomFieldResponse extends Model
         CustomField::TYPE_TEXT => 'value_str',
         CustomField::TYPE_RADIO => 'value_str',
         CustomField::TYPE_SELECT => 'value_str',
+        CustomField::TYPE_MULTISELECT => 'value_str',
         CustomField::TYPE_NUMBER => 'value_int',
         CustomField::TYPE_CHECKBOX => 'value_int',
         CustomField::TYPE_TEXTAREA => 'value_text',

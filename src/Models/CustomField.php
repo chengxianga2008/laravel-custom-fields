@@ -35,6 +35,11 @@ class CustomField extends Model
     /**
      * @var string
      */
+    const TYPE_MULTISELECT = 'multiselect';
+
+    /**
+     * @var string
+     */
     const TYPE_TEXT = 'text';
 
     /**
@@ -184,6 +189,12 @@ class CustomField extends Model
             ],
 
             self::TYPE_SELECT => [
+                'string',
+                'max:255',
+                Rule::in($this->answers),
+            ],
+
+            self::TYPE_MULTISELECT => [
                 'string',
                 'max:255',
                 Rule::in($this->answers),
