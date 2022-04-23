@@ -108,7 +108,11 @@ class CustomFieldResponse extends Model
     {
         // Checkboxes send a default value of "on", so we need to booleanize the value
         if ($this->field->type === 'checkbox') {
-            $value = ! ! $value;
+            $value = !!$value;
+        }
+
+        if ($this->field->type === 'number') {
+            $value = (int) $value;
         }
 
         return $value;
