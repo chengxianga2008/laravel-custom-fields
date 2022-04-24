@@ -218,8 +218,7 @@ class CustomField extends Model
             ],
 
             self::TYPE_MULTISELECT => [
-                'string',
-                'max:255',
+                'array',
                 Rule::in($this->answers),
             ],
 

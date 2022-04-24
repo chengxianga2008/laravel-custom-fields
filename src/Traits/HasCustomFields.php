@@ -7,6 +7,7 @@ use Givebutter\LaravelCustomFields\Exceptions\WrongNumberOfFieldsForOrderingExce
 use Givebutter\LaravelCustomFields\Models\CustomField;
 use Givebutter\LaravelCustomFields\Validators\CustomFieldValidator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 trait HasCustomFields
 {
@@ -40,6 +41,20 @@ trait HasCustomFields
         return new CustomFieldValidator($keyAdjustedFields, $validationRules);
     }
 
+    public function validateCustomField($field_id, $value)
+    {
+        $field = $this->customFields()->whereNull('archived_at')->where('id', $field_id)->first();
+        $validationRules = [
+            "input" => $field->validationRules,
+        ];
+
+        $keyAdjustedFields = [
+            "input" => $value
+        ];
+
+        return Validator::make($keyAdjustedFields, $validationRules);
+    }
+
     /**
      * Validate the given custom field request.
      *
@@ -69,7 +84,7 @@ trait HasCustomFields
         $fields->each(function ($id, $index) {
             $customField = $this->customFields()->find($id);
 
-            if (! $customField) {
+            if (!$customField) {
                 throw new FieldDoesNotBelongToModelException($id, $this);
             }
 
