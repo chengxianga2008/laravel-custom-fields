@@ -171,6 +171,29 @@ class CustomField extends Model
         return $typeRules;
     }
 
+    public function getValuesAttribute()
+    {
+        $responses = $this->responses;
+        $values = [];
+        foreach ($responses as $ele) {
+            $ele->field = $this;
+            $values[] = $ele->value;
+        }
+
+        if ($values) {
+            if ($this->type == self::TYPE_MULTISELECT) {
+                $result = $values;
+            } else {
+                $result = $values[0];
+            }
+        } else {
+            $result = null;
+        }
+
+        return $result;
+    }
+
+
     /**
      * Get the field validation rules.
      *
