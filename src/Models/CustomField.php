@@ -65,6 +65,7 @@ class CustomField extends Model
         'title',
         'description',
         'options',
+        'group',
         'required',
         'default_value',
         'order',
