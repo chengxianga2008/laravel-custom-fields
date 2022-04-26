@@ -82,7 +82,7 @@ Each field can contain the following: (More on these later)
 `description` :  The description of your field. Useful for providing more context to user filling out fields.
 `type` :  The type of field you're creating. Available types are outlined in the next section.
 `required` :  A boolean representing whether a field is required or not.
-`answers` : An array of acceptable values for fields that have user-selection. 
+`options` : An array of acceptable values for fields that have user-selection. 
 
 ### Creating field responses
 
@@ -115,13 +115,13 @@ Custom fields may be any of 5 types:
 
  - `text` : Free entry fields which are stored as strings. Use these for simple inputs as they have a max-length of 255 characters.
  - `textarea` : Free entry fields which are stored as text columns. Use these for longer bits of text that may not fit within the `text` field.
- - `radio` : These are multi-select fields, which require you to pass an `answers` property.*
- - `select` : These are multi-select fields, which require you to pass an `answers` property.*
+ - `radio` : These are multi-select fields, which require you to pass an `options` property.*
+ - `select` : These are multi-select fields, which require you to pass an `options` property.*
  - `checkbox` : Boolean fields.
 
 In general, these field types correspond to their respective HTML elements. In the future we may provide front-end scaffolding for these fields, but for now, that's up to you.
 
-*The `radio` and `select` field types require you to fill the `answers` property on the field. This is a simple array of strings, which are valid responses for the field. For example:
+*The `radio` and `select` field types require you to fill the `options` property on the field. This is a simple array of strings, which are valid responses for the field. For example:
 
  ```php
  $survey->customFields()->create([
@@ -193,7 +193,7 @@ Because of how common they are, required fields have native support in this pack
 $survey->customFields()->create([
     'title' => 'Do you love Laravel?',
     'type' => 'radio',
-    'answers' => ['Yes', 'YES'],
+    'options' => ['Yes', 'YES'],
     'required' => true
 ]);
 ```

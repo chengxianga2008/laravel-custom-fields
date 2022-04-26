@@ -39,7 +39,7 @@ class CustomFieldFactory extends Factory
             'required' => false,
             'title' => Lorem::sentence(3),
             'description' => Lorem::sentence(3),
-            'answers' => $typesRequireAnswers ? Lorem::words() : [],
+            'options' => $typesRequireAnswers ? Lorem::words() : [],
         ];
     }
 
@@ -126,13 +126,13 @@ class CustomFieldFactory extends Factory
     public function withAnswers($answers = 3)
     {
         if (is_numeric($answers)) {
-            $this->model->answers = Lorem::words($answers);
+            $this->model->options = Lorem::words($answers);
 
             return $this;
         }
 
         if (is_array($answers)) {
-            $this->model->answers = $answers;
+            $this->model->options = $answers;
 
             return $this;
         }

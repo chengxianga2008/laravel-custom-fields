@@ -65,7 +65,7 @@ class CustomField extends Model
         'type',
         'title',
         'description',
-        'answers',
+        'options',
         'required',
         'default_value',
         'order',
@@ -77,7 +77,7 @@ class CustomField extends Model
      * @var array
      */
     protected $casts = [
-        'answers' => 'array',
+        'options' => 'array',
         'archived_at' => 'datetime',
         'required' => 'boolean',
     ];
@@ -204,7 +204,7 @@ class CustomField extends Model
     {
         return [
             self::TYPE_CHECKBOX => $required
-                ? ['accepted', 'in:0,1']
+                ? ['present', 'in:0,1']
                 : ['in:0,1'],
 
             self::TYPE_NUMBER => [
@@ -214,18 +214,18 @@ class CustomField extends Model
             self::TYPE_SELECT => [
                 'string',
                 'max:255',
-                Rule::in($this->answers),
+                Rule::in($this->options),
             ],
 
             self::TYPE_MULTISELECT => [
                 'array',
-                Rule::in($this->answers),
+                Rule::in($this->options),
             ],
 
             self::TYPE_RADIO => [
                 'string',
                 'max:255',
-                Rule::in($this->answers),
+                Rule::in($this->options),
             ],
 
             self::TYPE_TEXT => [

@@ -48,7 +48,7 @@ class CustomFieldControllerTest extends TestCase
             CustomField::factory()->make([
                 'title' => 'favorite_album',
                 'type' => 'select',
-                'answers' => ['Tha Carter', 'Tha Carter II', 'Tha Carter III'],
+                'options' => ['Tha Carter', 'Tha Carter II', 'Tha Carter III'],
             ])
         );
 
@@ -80,7 +80,7 @@ class CustomFieldControllerTest extends TestCase
             CustomField::factory()->make([
                 'title' => 'favorite_album',
                 'type' => 'select',
-                'answers' => ['Tha Carter', 'Tha Carter II', 'Tha Carter III'],
+                'options' => ['Tha Carter', 'Tha Carter II', 'Tha Carter III'],
                 'required' => false,
             ])
         );
@@ -150,7 +150,7 @@ class CustomFieldControllerTest extends TestCase
             CustomField::factory()->make([
                 'title' => 'favorite_album',
                 'type' => 'select',
-                'answers' => ['Tha Carter', 'Tha Carter II', 'Tha Carter III'],
+                'options' => ['Tha Carter', 'Tha Carter II', 'Tha Carter III'],
             ])
         );
 
