@@ -85,7 +85,7 @@ trait HasCustomFields
             throw new WrongNumberOfFieldsForOrderingException($fields->count(), $this->customFields($group)->count());
         }
 
-        $fields->each(function ($id, $index) {
+        $fields->each(function ($id, $index) use ($group){
             $customField = $this->customFields($group)->find($id);
 
             if (!$customField) {
