@@ -36,7 +36,7 @@ trait HasCustomFields
      */
     public function validateCustomFields($fields)
     {
-        $validationRules = $this->customFields()->whereNull('archived_at')->get()->mapWithKeys(function ($field) {
+        $validationRules = $this->allCustomFields()->whereNull('archived_at')->get()->mapWithKeys(function ($field) {
             return ['field_' . $field->id => $field->validationRules];
         })->toArray();
 
@@ -50,7 +50,7 @@ trait HasCustomFields
 
     public function validateCustomField($field_id, $value)
     {
-        $field = $this->customFields()->whereNull('archived_at')->where('id', $field_id)->first();
+        $field = $this->allCustomFields()->whereNull('archived_at')->where('id', $field_id)->first();
         $validationRules = [
             "input" => $field->validationRules,
         ];
