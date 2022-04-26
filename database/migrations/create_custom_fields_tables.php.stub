@@ -20,13 +20,13 @@ class CreateCustomFieldsTables extends Migration
             $table->string('type');
             $table->boolean('required')->default(false);
             $table->json('options')->nullable();
+            $table->string('group')->nullable();
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('default_value')->nullable();
             $table->string('order');
             $table->timestamps();
             $table->timestamp('archived_at')->nullable();
-            $table->softDeletes();
         });
 
         Schema::create(config('custom-fields.tables.field-responses', 'custom_field_responses'), function (Blueprint $table) {

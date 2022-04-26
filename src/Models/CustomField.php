@@ -5,12 +5,11 @@ namespace Givebutter\LaravelCustomFields\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 
 class CustomField extends Model
 {
-    use SoftDeletes, HasFactory;
+    use HasFactory;
 
     /**
      * @var string
@@ -104,7 +103,7 @@ class CustomField extends Model
         parent::boot();
 
         self::creating(function ($field) {
-            $lastFieldOnCurrentModel = $field->model->morphMany(CustomField::class, 'model')->orderByDesc('order')->first();
+            $lastFieldOnCurrentModel = $field->model->morphMany(CustomField::class, 'model')->where('group', $field->group)->orderByDesc('order')->first();
             $field->order = ($lastFieldOnCurrentModel ? $lastFieldOnCurrentModel->order : 0) + 1;
         });
     }

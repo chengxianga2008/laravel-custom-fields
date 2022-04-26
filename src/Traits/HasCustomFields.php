@@ -16,9 +16,13 @@ trait HasCustomFields
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function customFields()
+    public function customFields($group = null)
     {
-        return $this->morphMany(CustomField::class, 'model')->orderBy('order');
+        $rel = $this->morphMany(CustomField::class, 'model')->orderBy('order');
+        if ($group) {
+            $rel = $rel->where('group', $group);
+        }
+        return $rel;
     }
 
     /**
@@ -73,16 +77,16 @@ trait HasCustomFields
      * @throws FieldDoesNotBelongToModelException
      * @throws WrongNumberOfFieldsForOrderingException
      */
-    public function order($fields)
+    public function order($fields, $group = null)
     {
         $fields = collect($fields);
 
-        if ($fields->count() !== $this->customFields()->count()) {
-            throw new WrongNumberOfFieldsForOrderingException($fields->count(), $this->customFields()->count());
+        if ($fields->count() !== $this->customFields($group)->count()) {
+            throw new WrongNumberOfFieldsForOrderingException($fields->count(), $this->customFields($group)->count());
         }
 
         $fields->each(function ($id, $index) {
-            $customField = $this->customFields()->find($id);
+            $customField = $this->customFields($group)->find($id);
 
             if (!$customField) {
                 throw new FieldDoesNotBelongToModelException($id, $this);
