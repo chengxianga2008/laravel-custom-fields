@@ -22,6 +22,12 @@ trait HasCustomFields
         return $rel;
     }
 
+    public function allCustomFields()
+    {
+        $rel = $this->morphMany(CustomField::class, 'model')->orderBy('group')->orderBy('order');
+        return $rel;
+    }
+
     /**
      * Validate the given custom fields.
      *
