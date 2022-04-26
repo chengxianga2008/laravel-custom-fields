@@ -203,9 +203,9 @@ class CustomField extends Model
     protected function getFieldValidationRules($required)
     {
         return [
-            self::TYPE_CHECKBOX => $required
-                ? ['present', 'in:0,1']
-                : ['in:0,1'],
+            self::TYPE_CHECKBOX => [
+                'boolean'
+            ],
 
             self::TYPE_NUMBER => [
                 'integer',
