@@ -18,7 +18,7 @@ trait HasCustomFields
      */
     public function customFields($group = null)
     {
-        $rel = $this->morphMany(CustomField::class, 'model')->where('group', $group)->orderBy(['group', 'order']);
+        $rel = $this->morphMany(CustomField::class, 'model')->where('group', $group)->orderBy('order');
         return $rel;
     }
 
