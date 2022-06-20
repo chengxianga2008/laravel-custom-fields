@@ -18,13 +18,13 @@ trait HasCustomFields
      */
     public function customFields($group = null)
     {
-        $rel = $this->morphMany(CustomField::class, 'model')->whereNull('archived_at')->where('group', $group)->orderBy('order');
+        $rel = $this->morphMany(CustomField::class, 'model')->where('group', $group)->orderBy('order');
         return $rel;
     }
 
     public function allCustomFields()
     {
-        $rel = $this->morphMany(CustomField::class, 'model')->whereNull('archived_at')->orderBy('group')->orderBy('order');
+        $rel = $this->morphMany(CustomField::class, 'model')->orderBy('group')->orderBy('order');
         return $rel;
     }
 
@@ -36,7 +36,7 @@ trait HasCustomFields
      */
     public function validateCustomFields($fields)
     {
-        $validationRules = $this->allCustomFields()->whereNull('archived_at')->get()->mapWithKeys(function ($field) {
+        $validationRules = $this->allCustomFields()->get()->mapWithKeys(function ($field) {
             return ['field_' . $field->id => $field->validationRules];
         })->toArray();
 
@@ -50,7 +50,12 @@ trait HasCustomFields
 
     public function validateCustomField($field_id, $value)
     {
-        $field = $this->allCustomFields()->whereNull('archived_at')->where('id', $field_id)->first();
+        $field = $this->allCustomFields()->where('id', $field_id)->first();
+
+        if (!$field) {
+            throw new FieldDoesNotBelongToModelException($field_id, $this);
+        }
+
         $validationRules = [
             "input" => $field->validationRules,
         ];

@@ -3,13 +3,14 @@
 namespace Givebutter\LaravelCustomFields\Models;
 
 use Carbon\Carbon;
+use Givebutter\LaravelCustomFields\Traits\Archives;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 
 class CustomField extends Model
 {
-    use HasFactory;
+    use HasFactory, Archives;
 
     /**
      * @var string
