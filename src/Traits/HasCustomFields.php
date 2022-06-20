@@ -18,13 +18,13 @@ trait HasCustomFields
      */
     public function customFields($group = null)
     {
-        $rel = $this->morphMany(CustomField::class, 'model')->where('group', $group)->orderBy('order');
+        $rel = $this->morphMany(CustomField::class, 'model')->whereNull('archived_at')->where('group', $group)->orderBy('order');
         return $rel;
     }
 
     public function allCustomFields()
     {
-        $rel = $this->morphMany(CustomField::class, 'model')->orderBy('group')->orderBy('order');
+        $rel = $this->morphMany(CustomField::class, 'model')->whereNull('archived_at')->orderBy('group')->orderBy('order');
         return $rel;
     }
 
