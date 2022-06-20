@@ -48,6 +48,16 @@ class CustomField extends Model
     const TYPE_TEXTAREA = 'textarea';
 
     /**
+     * @var string
+     */
+    const TYPE_EMAIL = 'email';
+
+    /**
+     * @var string
+     */
+    const TYPE_PHONE = 'phone';
+
+    /**
      * The attributes that aren't mass assignable.
      *
      * @var string[]|bool
@@ -171,9 +181,9 @@ class CustomField extends Model
 
         array_unshift($typeRules, $this->required ? 'required' : 'nullable');
 
-        if($this->rules){
+        if ($this->rules) {
             $rules = [];
-            foreach($this->rules as $key => $value){
+            foreach ($this->rules as $key => $value) {
                 $rules[] = $key . ':' . $value;
             }
             $typeRules = array_merge($typeRules, $rules);
@@ -224,7 +234,6 @@ class CustomField extends Model
 
             self::TYPE_SELECT => [
                 'string',
-                'max:255',
                 Rule::in($this->options),
             ],
 
@@ -235,17 +244,23 @@ class CustomField extends Model
 
             self::TYPE_RADIO => [
                 'string',
-                'max:255',
                 Rule::in($this->options),
             ],
 
             self::TYPE_TEXT => [
                 'string',
-                'max:255',
             ],
 
             self::TYPE_TEXTAREA => [
                 'string',
+            ],
+
+            self::TYPE_EMAIL => [
+                'email'
+            ],
+
+            self::TYPE_PHONE => [
+                'string'
             ],
         ];
     }
