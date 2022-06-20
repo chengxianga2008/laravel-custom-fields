@@ -66,6 +66,7 @@ class CustomField extends Model
         'title',
         'description',
         'options',
+        'rules',
         'group',
         'required',
         'default_value',
@@ -79,6 +80,7 @@ class CustomField extends Model
      */
     protected $casts = [
         'options' => 'array',
+        'rules' => 'json',
         'archived_at' => 'datetime',
         'required' => 'boolean',
     ];
@@ -168,6 +170,14 @@ class CustomField extends Model
         $typeRules = $this->getFieldValidationRules($this->required)[$this->type];
 
         array_unshift($typeRules, $this->required ? 'required' : 'nullable');
+
+        if($this->rules){
+            $rules = [];
+            foreach($this->rules as $key => $value){
+                $rules[] = $key . ':' . $value;
+            }
+            $typeRules = array_merge($typeRules, $rules);
+        }
 
         return $typeRules;
     }
