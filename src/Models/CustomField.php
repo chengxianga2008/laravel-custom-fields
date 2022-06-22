@@ -181,13 +181,13 @@ class CustomField extends Model
 
         array_unshift($typeRules, $this->required ? 'required' : 'nullable');
 
-        if ($this->rules) {
-            $rules = [];
-            foreach ($this->rules as $key => $value) {
-                $rules[] = $key . ':' . $value;
-            }
-            $typeRules = array_merge($typeRules, $rules);
-        }
+        // if ($this->rules) {
+        //     $rules = [];
+        //     foreach ($this->rules as $key => $value) {
+        //         $rules[] = $key . ':' . $value;
+        //     }
+        //     $typeRules = array_merge($typeRules, $rules);
+        // }
 
         return $typeRules;
     }
