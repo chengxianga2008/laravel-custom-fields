@@ -39,6 +39,8 @@ class CustomFieldResponse extends Model
         CustomField::TYPE_NUMBER => 'value_int',
         CustomField::TYPE_CHECKBOX => 'value_int',
         CustomField::TYPE_TEXTAREA => 'value_text',
+        CustomField::TYPE_PHONE => 'value_str',
+        CustomField::TYPE_EMAIL => 'value_str',
     ];
 
     /**
