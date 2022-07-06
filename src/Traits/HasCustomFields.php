@@ -57,11 +57,11 @@ trait HasCustomFields
         }
 
         $validationRules = [
-            "input" => $field->validationRules,
+            "field_{$field_id}" => $field->validationRules,
         ];
 
         $keyAdjustedFields = [
-            "input" => $value
+            "field_{$field_id}" => $value
         ];
 
         return Validator::make($keyAdjustedFields, $validationRules);
