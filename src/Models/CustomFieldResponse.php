@@ -41,7 +41,7 @@ class CustomFieldResponse extends Model
         CustomField::TYPE_TEXTAREA => 'value_text',
         CustomField::TYPE_PHONE => 'value_str',
         CustomField::TYPE_EMAIL => 'value_str',
-        CustomField::TYPE_FILE => 'value_int',
+        CustomField::TYPE_FILE => 'value_str',
     ];
 
     /**
@@ -114,7 +114,7 @@ class CustomFieldResponse extends Model
             $value = !!$value;
         }
 
-        if ($this->field->type === 'number' || $this->field->type === 'file') {
+        if ($this->field->type === 'number') {
             $value = (int) $value;
         }
 

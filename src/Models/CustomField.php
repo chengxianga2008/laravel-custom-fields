@@ -266,7 +266,7 @@ class CustomField extends Model
             ],
 
             self::TYPE_FILE => [
-                'integer'
+                'uuid'
             ],
         ];
     }
