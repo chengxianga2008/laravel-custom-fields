@@ -57,6 +57,8 @@ class CustomField extends Model
      */
     const TYPE_PHONE = 'phone';
 
+    const TYPE_FILE = 'file';
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -261,6 +263,10 @@ class CustomField extends Model
 
             self::TYPE_PHONE => [
                 'string'
+            ],
+
+            self::TYPE_FILE => [
+                'integer'
             ],
         ];
     }
