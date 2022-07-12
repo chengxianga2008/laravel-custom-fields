@@ -114,7 +114,7 @@ class CustomFieldResponse extends Model
             $value = !!$value;
         }
 
-        if ($this->field->type === 'number') {
+        if ($this->field->type === 'number' || $this->field->type === 'file') {
             $value = (int) $value;
         }
 
