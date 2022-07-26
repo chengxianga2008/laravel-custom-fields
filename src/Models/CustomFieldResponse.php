@@ -42,6 +42,7 @@ class CustomFieldResponse extends Model
         CustomField::TYPE_PHONE => 'value_str',
         CustomField::TYPE_EMAIL => 'value_str',
         CustomField::TYPE_FILE => 'value_str',
+        CustomField::TYPE_URL => 'value_str',
     ];
 
     /**

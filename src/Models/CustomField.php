@@ -59,6 +59,8 @@ class CustomField extends Model
 
     const TYPE_FILE = 'file';
 
+    const TYPE_URL = 'url';
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -267,6 +269,10 @@ class CustomField extends Model
 
             self::TYPE_FILE => [
                 'uuid'
+            ],
+
+            self::TYPE_URL => [
+                'string'
             ],
         ];
     }
