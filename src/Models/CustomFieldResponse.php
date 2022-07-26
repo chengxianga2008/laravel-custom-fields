@@ -28,6 +28,8 @@ class CustomFieldResponse extends Model
         'value_int' => 'integer',
     ];
 
+    protected $appends = ['value'];
+
     /**
      * @var string[]
      */
