@@ -3,6 +3,7 @@
 namespace Givebutter\LaravelCustomFields\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CustomFieldResponse extends Model
 {
@@ -165,5 +166,25 @@ class CustomFieldResponse extends Model
     protected function valueField()
     {
         return self::VALUE_FIELDS[$this->field->type];
+    }
+
+    public static function formatCustomFieldResponse(ResourceCollection $responses)
+    {
+        return $responses->groupBy('field_id')->map(function ($item, $key) {
+            $first_item = $item[0];
+            $values = $item->pluck('value');
+
+            if ($values) {
+                if ($first_item->field->type == CustomField::TYPE_MULTISELECT) {
+                    $first_item->value = $values;
+                } else {
+                    $first_item->value = $values[0];
+                }
+            } else {
+                $first_item->value = null;
+            }
+
+            return $first_item;
+        })->values();
     }
 }
